@@ -1,0 +1,18 @@
+.card {
+}
+
+.card-priority-baja {
+    color:rgb(3, 124, 3)
+}
+
+.card-priority-media {
+    color: rgb(132, 203, 226);
+}
+
+.card-priority-alta {
+    color: rgba(255, 145, 0, 0.829);
+}
+
+.card-priority-urgente {
+    color: red;
+}
