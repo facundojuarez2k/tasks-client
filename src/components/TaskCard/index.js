@@ -25,7 +25,10 @@ function TaskCard(props) {
         contentShort = "No description";
 
     return (
-        <Card border={ priority === 3 ? "danger" : "default" } className="card">
+            <Card   border={ priority === 3 ? "danger" : "default" } 
+                className="card" 
+                onClick={ () => console.log("CLICK " + props.id) }>
+            
             <Card.Header as="h5">
                 { props.title }
             </Card.Header>
@@ -46,6 +49,7 @@ function TaskCard(props) {
                 <div>Creada por <em>{ props.author }</em> el <em>{ props.dateCreated }</em></div>
                 {dateUpdated}
             </Card.Footer>
+
         </Card>
     );
 }
