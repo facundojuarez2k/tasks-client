@@ -17,6 +17,11 @@ function App() {
             <Route path="/tasks">
               <Tasks />
             </Route>
+            <Route path="/">
+              <div>
+                <a href="/tasks">Tareas</a>
+              </div>
+            </Route>
           </Switch>
         </Container>
       </div>

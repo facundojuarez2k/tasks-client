@@ -3,14 +3,7 @@ import './styles.css';
 import CardDeck from 'react-bootstrap/CardDeck';
 import TaskCard from '../TaskCard';
 import Task from '../Task';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useRouteMatch,
-  useParams
-} from "react-router-dom";
+import { Switch, Route, useRouteMatch } from "react-router-dom";
 
 //DELETE THIS
 const lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a vehicula augue. Sed fringilla posuere eros, a consectetur nisi vulputate quis. Vestibulum ante ipsum primis in faucibus orci luctus etf ultrices posuere cubilia curae; Duis scelerisque diam in tortor maximus, quis laoreet massa laoreet. Nam aliquam luctus congue. Maecenas cursus mi neque, non hendrerit metus suscipit at. Sed vitae magna diam. Cras posuere vel nisl ut auctor.";

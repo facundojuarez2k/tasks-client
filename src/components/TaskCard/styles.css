@@ -16,3 +16,12 @@
 .card-priority-urgente {
     color: red;
 }
+
+.card-header-link {
+    color: rgb(72, 167, 255);
+}
+
+.card-header-link:hover {
+    text-decoration: none;
+    color: rgb(72, 167, 255);
+}
