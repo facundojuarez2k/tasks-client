@@ -1,8 +1,9 @@
 import React from 'react';
 import './styles.css';
-import CardDeck from 'react-bootstrap/CardDeck';
+import { CardDeck, Row, Col } from 'react-bootstrap';
 import TaskCard from '../TaskCard';
 import Task from '../Task';
+import FilterBar from '../FilterBar';
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 
 //DELETE THIS
@@ -20,12 +21,20 @@ function Tasks(props) {
                     <Task />
                 </Route>
                 <Route path={match.path}>
-                    <CardDeck className="mt-3">
-                        <TaskCard id="1" key="1" title="Tarjeta 1" content={lorem} priority="1" author="Facundo Juarez" dateCreated="10/05/20" dateUpdated="19/05/20" />
-                        <TaskCard id="2" key="2" title="Tarjeta 2" content={lorem2} priority="0" author="Roberto" dateCreated="15/01/19"/>
-                        <TaskCard id="3"key="3" title="Tarjeta 3" priority="2"  author="Raulito" dateCreated="30/01/20"/>
-                        <TaskCard id="4" key="4" title="Tarjeta 4" priority="3" author="Sofía"/>
-                    </CardDeck>
+                    <Row>
+                        <Col sm={12} lg={3}>
+                            <FilterBar />
+                        </Col>
+                        <Col sm={12} lg={9}>
+                            <CardDeck className="justify-content-center">
+                                <TaskCard id="1" key="1" title="Tarjeta 1" status="2" content={lorem} priority="1" author="Facundo Juarez" dateCreated="10/05/20" dateUpdated="19/05/20" />
+                                <TaskCard id="2" key="2" title="Tarjeta 3" status="1" content={lorem} priority="1" author="Facundo Juarez" dateCreated="13/07/20" />
+                                <TaskCard id="3" key="3" title="Tarjeta 3" status="0" content={lorem2} priority="0" author="Roberto" dateCreated="15/01/19"/>
+                                <TaskCard id="4"key="4" title="Tarjeta 4" status="0" priority="3"  author="Raulito" dateCreated="30/01/20"/>
+                                <TaskCard id="5" key="5" title="Tarjeta 5" status="2" priority="3" author="Sofía"/>
+                            </CardDeck>
+                        </Col>
+                    </Row>
                 </Route>
             </Switch>
         </div>

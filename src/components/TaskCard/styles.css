@@ -1,4 +1,7 @@
-.card {
+.custom-card {
+    min-width: 18rem;
+    max-width: 25rem;
+    margin-top: 15px;
 }
 
 .card-priority-baja {
@@ -17,6 +20,10 @@
     color: red;
 }
 
+.card-status-resuelto {
+    color: green;
+}
+
 .card-header-link {
     color: rgb(72, 167, 255);
 }
@@ -24,4 +31,17 @@
 .card-header-link:hover {
     text-decoration: none;
     color: rgb(72, 167, 255);
+}
+
+@media (max-width: 335px) {
+    .custom-card {
+        min-width: auto;
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 576px) {
+    .custom-card {
+        min-width: 100%;
+    }
 }

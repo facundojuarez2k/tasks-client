@@ -2,20 +2,22 @@ import React from 'react';
 import './styles.css';
 import Card from 'react-bootstrap/Card';
 import { Link } from "react-router-dom"
+import { getPriorityStringFromNumber, getStatusStringFromNumber } from '../../helpers';
 
-const priorityMap = ["Baja", "Media", "Alta", "Urgente"];
 const contentMaxLength = 200;
 const titleMaxLength = 20;
 
 function TaskCard(props) {
     let priority = parseInt(props.priority);
+    let status = parseInt(props.status);
     let dateUpdated = props.dateUpdated;
     let contentShort = props.content;
     let title = props.title;
-
-    if(isNaN(priority) || priority < 0 || priority >= priorityMap.length)
-        priority = 0;
+    let cardClass = "custom-card";
     
+    const priorityString = getPriorityStringFromNumber(priority);
+    const statusString = getStatusStringFromNumber(status);
+
     if(typeof dateUpdated !== 'undefined')
         dateUpdated = <div>Última actualización: <em>{ props.dateUpdated }</em></div>;
     
@@ -35,17 +37,28 @@ function TaskCard(props) {
     else
         title = "No title";
 
+    if(status === 2)
+        cardClass += " border-success";
+    else
+        if(priority === 3)
+            cardClass += " border-danger";
+
     return (
-        <Card border={ priority === 3 ? "danger" : "default" } className="card">
+        <Card className={ cardClass }>
             <Card.Header as="h5">
                 <Link className="card-header-link" to={ `/tasks/${props.id}` }>{ props.title }</Link>
             </Card.Header>
             <Card.Header>
                 <Card.Subtitle className="mt-1 text-muted">
-                    <b>Prioridad: </b> 
-                    <span className={ "card-priority-" + priorityMap[priority].toLowerCase() }>
-                        { priorityMap[priority] }
+                    <b>Estado: </b>
+                    <span className={ "card-status-" + statusString.toLowerCase() }>
+                        { statusString }
                     </span>
+                    <hr></hr>
+                    <b>Prioridad: </b> 
+                    <span className={ "card-priority-" + priorityString.toLowerCase() }>
+                        { priorityString }
+                    </span>                    
                 </Card.Subtitle>
             </Card.Header>
             <Card.Body>
@@ -55,7 +68,7 @@ function TaskCard(props) {
             </Card.Body>
             <Card.Footer className="text-muted">
                 <div>Creada por <em>{ props.author }</em> el <em>{ props.dateCreated }</em></div>
-                {dateUpdated}
+                { dateUpdated }
             </Card.Footer>
         </Card>
     );

@@ -1,0 +1,11 @@
+.filter-bar-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+}
+
+.filter-searchbar {
+    display: block;
+    width: 100%;
+    margin-bottom: 0;
+}

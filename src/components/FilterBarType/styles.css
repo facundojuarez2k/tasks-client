@@ -1,0 +1,19 @@
+.filter-card {
+    display: inline-flex;
+    width: 100%;
+}
+
+.filter-card .title {
+    display: inline-block;
+    margin-bottom: 0;
+}
+
+.filter-card > .card-header{
+    display: flex;
+    flex-direction: row;
+}
+
+.filter-card .collapse-button {
+    cursor: pointer;
+    margin-left: auto;
+}
