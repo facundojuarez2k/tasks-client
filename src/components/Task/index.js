@@ -1,6 +1,6 @@
 import React from 'react';
 import './styles.css';
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { Breadcrumb, Row, Col, Table, Button, Image} from 'react-bootstrap';
 
 function Task(props) {
@@ -9,8 +9,8 @@ function Task(props) {
     return (
         <div>
             <Breadcrumb>
-                <Breadcrumb.Item href="/tasks">Tasks</Breadcrumb.Item>
-                <Breadcrumb.Item active>{ taskId }</Breadcrumb.Item>
+                <Link className="breadcrumb-item" to="/tasks">Tasks</Link>
+                <Link className="breadcrumb-item active">{ taskId }</Link>
             </Breadcrumb>
 
             <Row>

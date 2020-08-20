@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Switch, Route, useRouteMatch } from "react-router-dom";
-import { CardDeck, Row, Col, ToggleButtonGroup, ToggleButton, Table, Button, ButtonGroup } from 'react-bootstrap';
-import { FaTrashAlt, FaCheck, FaEdit, FaInfoCircle } from "react-icons/fa";
+import { Switch, Route, useRouteMatch, Link } from "react-router-dom";
+import { CardDeck, Row, Col, ToggleButtonGroup, ToggleButton, Table, Button, ButtonGroup, Form } from 'react-bootstrap';
+import { FaTrashAlt, FaCheck, FaEdit, FaInfoCircle, FaTh, FaList } from "react-icons/fa";
 import TaskCard from '../TaskCard';
 import Task from '../Task';
 import FilterBar from '../FilterBar';
@@ -15,8 +15,17 @@ const lorem2 = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In a ve
 function Tasks(props) {
     let match = useRouteMatch();
     let content;
-    const [displayStyle, setDisplayStyle] = useState("cards");
-    const handleDisplayStyleButton = (val) => setDisplayStyle(val);
+    let cachedDisplayStyle = localStorage.getItem("tasksDisplayStyle");
+
+    if(cachedDisplayStyle === null)
+        cachedDisplayStyle = "cards";
+
+    const [displayStyle, setDisplayStyle] = useState(cachedDisplayStyle);
+    
+    const handleDisplayStyleButton = function(val) {
+        setDisplayStyle(val);
+        localStorage.setItem("tasksDisplayStyle", val);
+    }
     
 
     switch(displayStyle) {
@@ -55,7 +64,7 @@ function Tasks(props) {
                                         <Button variant="light"><FaCheck /></Button>
                                         <Button variant="light"><FaEdit /></Button>
                                         <Button variant="light"><FaTrashAlt /></Button>
-                                        <Button variant="light"><FaInfoCircle/></Button>
+                                        <Link className="btn btn-light" to={ `/tasks/1` }><FaInfoCircle/></Link>
                                     </ButtonGroup>
                                     </td>
                                 </tr>
@@ -80,10 +89,15 @@ function Tasks(props) {
                 </Route>
                 <Route path={match.path}>
                     <Row className="mt-3">
-                        <Col sm={12} className="d-flex justify-content-end">
-                            <ToggleButtonGroup type="radio" name="display-style-options" value={displayStyle} onChange={ handleDisplayStyleButton }>
-                                <ToggleButton variant="secondary" value="cards">Cartas</ToggleButton>
-                                <ToggleButton variant="secondary" value="table">Tabla</ToggleButton>
+                        <Col sm={12} lg={{span: 9, offset: 3}} className="d-flex justify-content-end">
+                            <Form.Group controlId="formSearch" className="tasks-searchbar">
+                                <Form.Control type="text" placeholder="Buscar" />
+                                <Form.Text>
+                                </Form.Text>
+                            </Form.Group>
+                            <ToggleButtonGroup className="tasks-displaystyle" type="radio" name="display-style-options" value={displayStyle} onChange={ handleDisplayStyleButton }>
+                                <ToggleButton variant="secondary" value="cards"><FaTh/></ToggleButton>
+                                <ToggleButton variant="secondary" value="table"><FaList/></ToggleButton>
                             </ToggleButtonGroup>
                         </Col>
                     </Row>

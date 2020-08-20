@@ -1,6 +1,6 @@
 import React, { useState  } from 'react';
 import './styles.css';
-import { Form } from 'react-bootstrap';
+import {  } from 'react-bootstrap';
 import FilterBarType from '../FilterBarType';
 
 const filterStatusConfig = {
@@ -30,11 +30,6 @@ function FilterBar(props) {
 
     return (
         <div className="filter-bar-container">
-            <Form.Group controlId="formSearch" className="filter-searchbar">
-                <Form.Control type="text" placeholder="Buscar" />
-                <Form.Text>
-                </Form.Text>
-            </Form.Group>
             <FilterBarType data={filterStatus} setData={setFilterStatus} />
             <FilterBarType data={filterPriority} setData={setFilterPriority} />
         </div>
