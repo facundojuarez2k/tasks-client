@@ -30,6 +30,10 @@ function Task(props) {
                     <Table bordered striped>
                         <tbody>
                             <tr>
+                                <th>Estado</th>
+                                <td>Pendiente</td>
+                            </tr>
+                            <tr>
                                 <th>Prioridad</th>
                                 <td>Urgente</td>
                             </tr>

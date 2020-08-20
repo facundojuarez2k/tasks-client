@@ -4,7 +4,7 @@ import { Form, FormCheck, Card, Collapse } from 'react-bootstrap';
 import { ChevronDown } from 'react-feather';
 
 function FilterBarType(props) {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(true);
 
     return (
         <Card className="filter-card">
