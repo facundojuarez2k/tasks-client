@@ -2,73 +2,74 @@ import React from 'react';
 import './styles.css';
 import Card from 'react-bootstrap/Card';
 import { Link } from "react-router-dom"
-import { getPriorityStringFromNumber, getStatusStringFromNumber } from '../../helpers';
 
 const contentMaxLength = 200;
 const titleMaxLength = 20;
 
 function TaskCard(props) {
-    let priority = parseInt(props.priority);
-    let status = parseInt(props.status);
-    let dateUpdated = props.dateUpdated;
-    let contentShort = props.content;
-    let title = props.title;
+    let taskId = props.data.id;
+    let taskTitle = props.data.title;
+    let taskDateUpdated = props.data.dateUpdated;
+    let taskDateCreated = props.data.dateCreated;
+    let taskContent = props.data.content;
+    let taskAuthor = props.data.author;
+    let taskStatus = props.data.status;
+    let taskPriority = props.data.priority;
+
     let cardClass = "custom-card";
-    
-    const priorityString = getPriorityStringFromNumber(priority);
-    const statusString = getStatusStringFromNumber(status);
+    let taskDateUpdatedElem = null;
 
-    if(typeof dateUpdated !== 'undefined')
-        dateUpdated = <div>Última actualización: <em>{ props.dateUpdated }</em></div>;
+    if(typeof taskDateUpdated !== 'undefined' && taskDateUpdated !== "")
+        taskDateUpdatedElem = <div>Última actualización: <em>{ taskDateUpdated }</em></div>;
     
-    if(typeof contentShort !== 'undefined')
-        if(contentShort.length > contentMaxLength-3)
-            contentShort = contentShort.slice(0, contentMaxLength-3) + "...";
+    if(typeof taskContent !== 'undefined')
+        if(taskContent.length > contentMaxLength-3)
+            taskContent = taskContent.slice(0, contentMaxLength-3) + "...";
         else
-            contentShort = contentShort.slice(0, contentMaxLength);
+            taskContent = taskContent.slice(0, contentMaxLength);
     else
-        contentShort = "No description";
+        taskContent = "Sin descripción";
 
-    if(typeof title !== 'undefined')
-        if(title.length > titleMaxLength-3)
-        title = title.slice(0, titleMaxLength-3) + "...";
+    if(typeof taskTitle !== 'undefined')
+        if(taskTitle.length > titleMaxLength-3)
+            taskTitle = taskTitle.slice(0, titleMaxLength-3) + "...";
     else
-        title = title.slice(0, titleMaxLength);
+        taskTitle = taskTitle.slice(0, titleMaxLength);
     else
-        title = "No title";
+        taskTitle = "Sin título";
 
-    if(status === 2)
+    if(props.completed === true)
         cardClass += " border-success";
     else
-        if(priority === 3)
+        if(props.urgent === true)
             cardClass += " border-danger";
 
     return (
         <Card className={ cardClass }>
             <Card.Header as="h5">
-                <Link className="card-header-link" to={ `/tasks/${props.id}` }>{ props.title }</Link>
+                <Link className="card-header-link" to={ `/tasks/${taskId}` }>{ taskTitle }</Link>
             </Card.Header>
             <Card.Header>
                 <Card.Subtitle className="mt-1 text-muted">
                     <b>Estado: </b>
-                    <span className={ "card-status-" + statusString.toLowerCase() }>
-                        { statusString }
+                    <span className={ "card-status-" + taskStatus.toLowerCase() }>
+                        { taskStatus }
                     </span>
                     <hr></hr>
                     <b>Prioridad: </b> 
-                    <span className={ "card-priority-" + priorityString.toLowerCase() }>
-                        { priorityString }
+                    <span className={ "card-priority-" + taskPriority.toLowerCase() }>
+                        { taskPriority }
                     </span>                    
                 </Card.Subtitle>
             </Card.Header>
             <Card.Body>
                 <Card.Text>
-                    { contentShort }
+                    { taskContent }
                 </Card.Text>
             </Card.Body>
             <Card.Footer className="text-muted">
-                <div>Creada por <em>{ props.author }</em> el <em>{ props.dateCreated }</em></div>
-                { dateUpdated }
+                <div>Creada por <em>{ taskAuthor }</em> el <em>{ taskDateCreated }</em></div>
+                { taskDateUpdatedElem }
             </Card.Footer>
         </Card>
     );

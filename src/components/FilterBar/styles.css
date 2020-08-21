@@ -3,3 +3,22 @@
     flex-direction: column;
     margin-top: 15px;
 }
+
+.filter-side-panel {
+    display: block
+}
+
+.filter-bar-dropdown-item {
+    padding: 10px 10px 3px 15px;
+}
+
+.filter-bar-dropdown-checkbox{
+    margin-bottom: 7px;
+}
+
+@media screen and (min-width: 768px) {
+    .filter-bar-container {
+        flex-direction: row;
+        margin-top: 15px;
+    }
+}
