@@ -1,11 +1,24 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import { ButtonGroup } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { markAsSolved } from '../../state/actions/tasksActions';
+import { ButtonGroup, Button } from 'react-bootstrap';
 import { FaCheck, FaEdit, FaInfoCircle } from "react-icons/fa";
 import DataTable from 'react-data-table-component';
 import './styles.css';
 
 function TasksTable(props) {
+
+    const handleSolvedButton = (id) => {
+        const taskId = parseInt(id);
+        props.dispatch(markAsSolved(taskId));
+    }
+
+    const handleEditButton = (id) => {
+        const taskId = parseInt(id);
+        console.log(taskId);
+    }
+
     const columns = [
         {
             name: 'Titulo',
@@ -40,8 +53,8 @@ function TasksTable(props) {
         {
             name: 'Acciones',
             cell: (row) =>  (<ButtonGroup>
-                                <Link className="btn btn-light" to={ `/tasks/${row.id}` }><FaCheck/></Link>
-                                <Link className="btn btn-light" to={ `/tasks/${row.id}` }><FaEdit/></Link>
+                                <Button className="btn btn-light" onClick={ () => handleSolvedButton(row.id) }><FaCheck/></Button>
+                                <Button className="btn btn-light" onClick={ () => handleEditButton(row.id) }><FaEdit/></Button>
                                 <Link className="btn btn-light" to={ `/tasks/${row.id}` }><FaInfoCircle/></Link>
                             </ButtonGroup>),
             sortable: false,
@@ -50,14 +63,6 @@ function TasksTable(props) {
         },
     ];
 
-    /*
-    <ButtonGroup>
-        <Button variant="light"><FaCheck /></Button>
-        <Button variant="light"><FaEdit /></Button>
-        <Button variant="light"><FaTrashAlt /></Button>
-        <Link className="btn btn-light" to={ `/tasks/1` }><FaInfoCircle/></Link>
-    </ButtonGroup>
-*/
     return (
         <DataTable
             noHeader 
@@ -69,4 +74,4 @@ function TasksTable(props) {
     );
 }
 
-export default TasksTable;
+export default connect()(TasksTable);
